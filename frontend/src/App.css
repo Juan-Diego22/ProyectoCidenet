@@ -1,0 +1,151 @@
+/* --- Variables y Reset --- */
+:root {
+  --primary: #004a99;
+  --primary-hover: #003366;
+  --bg-body: #f0f2f5;
+  --white: #ffffff;
+  --border: #e1e4e8;
+  --text-main: #2d3436;
+  --success-bg: #e6fffa;
+  --success-text: #2c7a7b;
+}
+
+body {
+  background-color: var(--white);
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text-main);
+  margin: 0;
+}
+
+/* --- Layout Principal --- */
+.App {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 2rem;;
+}
+
+.main-title {
+  text-align: center;
+  color: var(--text-main);
+  font-weight: 500;
+  margin-bottom: 2.5rem;
+}
+
+.main-content {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* --- Componentes: Tarjetas --- */
+.card {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Formulario --- */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-sizing: border-box;
+  background-color: var(--white);
+  font-size: 0.9rem;
+  color: var(--text-main);
+}
+
+.input-field:focus {
+  outline: 2px solid var(--primary);
+  border-color: transparent;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover { background: var(--primary-hover); }
+
+/* --- Tabla --- */
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th {
+  background: #f8f9fa;
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 2px solid var(--border);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.data-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+.status-badge {
+  background: var(--success-bg);
+  color: var(--success-text);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+/* --- Paginación --- */
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn-pagination {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--primary);
+  background: var(--primary);
+  color: var(--primary);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-pagination:disabled {
+  border-color: #ccc;
+  color: #ccc;
+  cursor: not-allowed;
+}
