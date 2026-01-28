@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css'; // Asegúrate de tener este import para los nuevos estilos
 import EmployeeForm from './components/EmployeeForm';
 import EmployeeTable from './components/EmployeeTable';
+import logoCidenet from './assets/logoCidenet.png';
 
 function App() {
   const [refresh, setRefresh] = useState(false);
@@ -13,7 +14,8 @@ function App() {
 
   return (
     <div className="App">
-      <header>
+      <header className="main-header">
+        <img src={logoCidenet} alt="Logo Cidenet" className="header-logo" />
         <h1 className="main-title">Sistema de Gestión de Empleados</h1>
       </header>
       

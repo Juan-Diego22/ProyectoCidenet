@@ -149,3 +149,20 @@ body {
   color: #ccc;
   cursor: not-allowed;
 }
+
+.main-header {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Espacio entre el logo y el texto */
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+.header-logo {
+  height: 100px; /* Ajusta el tamaño según necesites */
+  width: auto;
+}
+
+.main-title {
+  margin: 0; /* Quita márgenes para que se alinee perfectamente con el logo */
+}
