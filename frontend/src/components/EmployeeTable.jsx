@@ -1,38 +1,63 @@
-import React, { useEffect, useState } from 'react';
-import { getEmployees } from '../services/api';
+import React, { useEffect, useState, useCallback } from 'react';
+import { getEmployees, deleteEmployee } from '../services/api';
 
-const EmployeeTable = ({ refresh }) => {
+const EmployeeTable = ({ refresh, onEdit }) => {
   const [employees, setEmployees] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(0);
 
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const response = await getEmployees(page);
-        setEmployees(response.data);
-      } catch (error) {
-        console.error("Error al cargar empleados", error);
-      }
-    };
-    loadData();
-  }, [page, refresh]);
+  const loadData = useCallback(async () => {
+    try {
+      const response = await getEmployees(page);
+      setEmployees(response.data);
+    } catch (error) {
+      console.error("Error al cargar empleados", error);
+    }
+  }, [page]);
 
-  const filteredEmployees = employees.filter(emp => 
-    emp.primer_nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    emp.primer_apellido.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    emp.numero_identificacion.includes(searchTerm)
-  );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    loadData();
+  }, [loadData, refresh]);
+
+  const handleDelete = async (id) => {
+    const confirmed = window.confirm("¿Está seguro de que desea eliminar el empleado? Sí / No");
+    if (confirmed) {
+      try {
+        await deleteEmployee(id);
+        alert("Empleado eliminado correctamente");
+        loadData();
+      } catch (err) {
+        console.error("Error al eliminar:", err);
+        alert("Error al eliminar");
+      }
+    }
+  };
+
+  const filteredEmployees = employees.filter(emp => {
+    if (!searchTerm) return true;
+    const s = searchTerm.toString().toLowerCase();
+    const fields = [
+      emp.primer_nombre,
+      emp.otros_nombres,
+      emp.primer_apellido,
+      emp.segundo_apellido,
+      emp.tipo_identificacion,
+      emp.numero_identificacion,
+      emp.pais_empleo,
+      emp.correo_electronico,
+      emp.estado
+    ];
+    return fields.some(f => f && f.toString().toLowerCase().includes(s));
+  });
 
   return (
     <div className="card">
       <div className="table-header">
         <h2>Colaboradores</h2>
         <input 
-          type="text" 
-          className="input-field" 
-          style={{ width: '250px' }} 
-          placeholder=" Buscar..." 
+          type="text" className="input-field" style={{ width: '300px' }} 
+          placeholder="Buscar por nombre, apellidos, ID, email, país o estado..." 
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
@@ -43,8 +68,8 @@ const EmployeeTable = ({ refresh }) => {
             <th>Nombre</th>
             <th>ID</th>
             <th>Email</th>
-            <th>Área</th>
             <th>Estado</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -53,8 +78,13 @@ const EmployeeTable = ({ refresh }) => {
               <td><strong>{emp.primer_nombre} {emp.primer_apellido}</strong></td>
               <td>{emp.numero_identificacion}</td>
               <td style={{ color: 'var(--primary)' }}>{emp.correo_electronico}</td>
-              <td>{emp.area}</td>
-              <td><span className="status-badge">{emp.estado}</span></td>
+              <td><span className="status-badge">{emp.estado || 'ACTIVO'}</span></td>
+              <td>
+                <div className="actions-cell">
+                  <button className="btn-edit" onClick={() => onEdit(emp)}>Editar</button>
+                  <button className="btn-delete" onClick={() => handleDelete(emp.id)}>Eliminar</button>
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>

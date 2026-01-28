@@ -12,8 +12,6 @@ class Employee(Base):
     segundo_apellido = Column(String(20), nullable=False) 
     primer_nombre = Column(String(20), nullable=False)
     otros_nombres = Column(String(50), nullable=True)
-    
-    # Empleo
     pais_empleo = Column(String, nullable=False)
     tipo_identificacion = Column(String, nullable=False) 
     numero_identificacion = Column(String(20), nullable=False)
