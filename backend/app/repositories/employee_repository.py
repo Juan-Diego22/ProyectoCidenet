@@ -4,7 +4,7 @@ from app.schemas.employee_schema import EmployeeCreate
 from app.services.email_service import obtener_correo_unico
 
 def create_employee(db: Session, employee_data: EmployeeCreate):
-    # Obtener correos para validar unicidad [cite: 21]
+    # Obtener correos para validar unicidad 
     existentes = db.query(Employee.correo_electronico).all()
     lista_correos = [e[0] for e in existentes]
     
@@ -18,7 +18,7 @@ def create_employee(db: Session, employee_data: EmployeeCreate):
     db_employee = Employee(
         **employee_data.dict(),
         correo_electronico=correo_final,
-        estado="Activo" # Regla: No modificable por usuario 
+        estado="Activo" # No modificable por usuario 
     )
     
     db.add(db_employee)
