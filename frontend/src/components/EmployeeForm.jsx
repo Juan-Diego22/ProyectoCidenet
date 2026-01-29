@@ -202,12 +202,12 @@ const EmployeeForm = ({ onEmployeeCreated, editingEmployee }) => {
         {/* REGLA: Etiqueta dinámica (Registro vs Edición) */}
         {editingEmployee ? (
           <div className="form-group">
-            <label>Fecha y Hora de Edición (Sistema)</label>
+            <label>Fecha y Hora de Edición </label>
             <input className="input-field" type="text" value={formData.fecha_edicion} readOnly style={{backgroundColor: '#eee'}} />
           </div>
         ) : (
           <div className="form-group">
-            <label>Fecha y Hora de Registro (Sistema)</label>
+            <label>Fecha y Hora de Registro </label>
             <input className="input-field" type="text" value={formData.fecha_registro} readOnly style={{backgroundColor: '#eee'}} />
           </div>
         )}

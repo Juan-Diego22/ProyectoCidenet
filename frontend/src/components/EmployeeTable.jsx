@@ -21,7 +21,7 @@ const EmployeeTable = ({ refresh, onEdit }) => {
   }, [loadData, refresh]);
 
   const handleDelete = async (id) => {
-    const confirmed = window.confirm("¿Está seguro de que desea eliminar el empleado? Sí / No");
+    const confirmed = window.confirm("¿Está seguro de que desea eliminar el empleado?");
     if (confirmed) {
       try {
         await deleteEmployee(id);
